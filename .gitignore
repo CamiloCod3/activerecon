@@ -1,0 +1,15 @@
+
+venv/
+
+__pycache__/
+*.pyc
+*.pyo
+
+*.log
+*.md.bak
+*.tmp
+
+.vscode/
+.idea/
+
+reports/
