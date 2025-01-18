@@ -1,19 +1,15 @@
-from rich.console import Console
-from rich.table import Table
+import logging
 
-def generate_report(target, scan_results, output_file="report.md"):
+def generate_report(target, results, output_file="report.md"):
     """
-    Genererar en rapport baserat på rekognosering.
+    Generates a report based on reconnaissance results.
     """
-    console = Console()
-    table = Table(title=f"Scan Report for {target}")
-    table.add_column("Service", style="cyan")
-    table.add_column("Details", style="green")
-
-    for result in scan_results:
-        table.add_row(result.get("service", "Unknown"), result.get("details", "N/A"))
-
-    console.print(table)
-
+    logging.info("Generating report")
     with open(output_file, "w") as file:
-        file.write(str(table))
+        file.write(f"# Scan Report for {target}\n\n")
+        file.write(f"## Summary\n\n")
+        file.write(f"- Open Ports: {len(results.get('Port Scan', []))}\n")
+        file.write(f"- Vulnerabilities Found: {len(results.get('Vulnerabilities', []))}\n\n")
+        for module, data in results.items():
+            file.write(f"## {module}\n\n{data}\n\n")
+    logging.info(f"Report saved to {output_file}")
