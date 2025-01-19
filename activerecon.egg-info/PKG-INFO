@@ -1,0 +1,26 @@
+Metadata-Version: 2.2
+Name: activerecon
+Version: 0.1.0
+Summary: Active Recon: An automated reconnaissance tool
+Home-page: https://github.com/dinGit/ActiveRecon
+Author: Ditt Namn
+Author-email: dinmail@example.com
+License: MIT
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Requires-Dist: requests
+Requires-Dist: paramiko
+Requires-Dist: rich
+Requires-Dist: dnspython
+Requires-Dist: xmltodict
+Requires-Dist: pyyaml
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: home-page
+Dynamic: license
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary

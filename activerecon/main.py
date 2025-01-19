@@ -1,11 +1,11 @@
 import argparse
 import logging
 
-from modules.nmap_scan import run_nmap_scan
-from modules.http_enum import analyze_http
-from modules.dns_analysis import analyze_dns
-from modules.report_generator import generate_report
-from modules.config_loader import load_config
+from .modules.nmap_scan import run_nmap_scan
+from .modules.http_enum import analyze_http
+from .modules.dns_analysis import analyze_dns
+from .modules.report_generator import generate_report
+from .modules.config_loader import load_config
 
 
 # Load configuration
@@ -62,6 +62,7 @@ def main():
     # Step 4: Generera rapport
     generate_report(target, results, args.output)
     logging.info(f"Recon completed successfully! Report saved to {args.output}")
+
 
 if __name__ == "__main__":
     main()

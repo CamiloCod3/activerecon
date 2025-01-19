@@ -4,4 +4,3 @@ rich
 dnspython
 xmltodict
 pyyaml
-setuptools
