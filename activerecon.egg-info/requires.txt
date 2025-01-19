@@ -1,6 +1,0 @@
-requests
-paramiko
-rich
-dnspython
-xmltodict
-pyyaml

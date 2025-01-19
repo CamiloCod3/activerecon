@@ -1,2 +1,0 @@
-[console_scripts]
-activerecon = activerecon.main:main
