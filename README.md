@@ -3,6 +3,7 @@
 ActiveRecon is an automated reconnaissance tool that combines Nmap scanning, DNS analysis, and HTTP analysis.
 
 ## Features
+
 - **Nmap Scanning**: Execute various predefined profiles for fast and comprehensive port scanning.
 - **DNS Analysis**: Query A, MX, and TXT records for a target.
 - **HTTP Analysis**: Identify HTTP services and fetch basic details.
@@ -10,6 +11,7 @@ ActiveRecon is an automated reconnaissance tool that combines Nmap scanning, DNS
 ## Installation
 
 ### Prerequisites
+
 - **Python 3.6 or later**
 - **Nmap**: Install Nmap using the following command:
 
@@ -18,6 +20,7 @@ ActiveRecon is an automated reconnaissance tool that combines Nmap scanning, DNS
     ```
 
 ### Install from GitHub
+
 1. Clone the repository:
 
     ```bash
@@ -32,6 +35,7 @@ ActiveRecon is an automated reconnaissance tool that combines Nmap scanning, DNS
     ```
 
 ## Usage
+
 Once installed, you can run the tool as a command-line utility:
 
 ```bash
