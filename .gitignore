@@ -13,3 +13,7 @@ __pycache__/
 .idea/
 
 reports/
+
+build/
+dist/
+*.egg-info/
