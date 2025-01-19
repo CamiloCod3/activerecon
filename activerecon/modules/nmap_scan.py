@@ -1,37 +1,40 @@
 import subprocess
 import logging
-import xmltodict
-import json
+import xml.etree.ElementTree as ET
 
-def run_nmap_scan(target, scan_command, timeout=120):
+def run_nmap_scan(target, scan_command):
     """
-    Runs an Nmap scan with the provided command and target, returning results as JSON.
-    A timeout can be specified (default=120 seconds).
+    Runs an Nmap scan with XML output and parses the results.
     """
-    # Exempelvis: command = "nmap -Pn -n -sS --top-ports 100 -T4 -oX - target"
     command = f"nmap {scan_command} -oX - {target}"
     try:
         logging.info(f"Executing Nmap scan: {command}")
-        result = subprocess.run(
-            command.split(),
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,
-            timeout=timeout
-        )
+        result = subprocess.run(command.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        
+        # Parse the XML output
         xml_output = result.stdout
+        root = ET.fromstring(xml_output)
 
-        if result.stderr:
-            logging.warning(f"Nmap STDERR: {result.stderr}")
+        # Extract useful data
+        scan_results = {
+            "target": target,
+            "ports": [],
+            "status": root.find(".//status").attrib,
+            "scan_info": root.find("scaninfo").attrib,
+            "host": root.find("host/address").attrib.get("addr", "Unknown"),
+        }
 
-        # Omvandlar XML -> dict -> JSON
-        json_output = json.loads(json.dumps(xmltodict.parse(xml_output)))
-        return json_output
+        # Collect port information
+        for port in root.findall(".//port"):
+            port_data = {
+                "portid": port.attrib.get("portid"),
+                "protocol": port.attrib.get("protocol"),
+                "state": port.find("state").attrib.get("state"),
+                "service": port.find("service").attrib.get("name", "Unknown"),
+            }
+            scan_results["ports"].append(port_data)
 
-    except subprocess.TimeoutExpired as te:
-        logging.error(f"Nmap scan timed out after {timeout} seconds: {te}")
-        return {}
-
+        return scan_results
     except Exception as e:
         logging.error(f"Failed to execute Nmap scan: {e}")
         return {}
